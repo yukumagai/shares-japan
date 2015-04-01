@@ -1,6 +1,436 @@
-%p#notice= notice
+.container-fluid
+  .row
+    .col-xs-2
+      .float-left
+        %img{:alt => "logo", :height => "50", :src => "assets/Shares-logo.png", :width => "200"}/
+      .profile
+        %img.profile-img{:alt => "profile", :height => "80", :src => "assets/profile.jpg", :width => "80"}/
+        %p.profile-name
+          %a{:href => "file:///Users/kumagaiyuu/programming/shares/profile.html"} 熊谷祐
+      .menu メニュー
+      %ul.menu-ul
+        %li.menu-li
+          .menu-1
+            %i.fa.fa-plus{"data-target" => "#myModal", "data-toggle" => "modal",} 
+            %a 貸し出しリストに追加
+            #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+              .modal-dialog
+                .modal-content
+                  .modal-header
+                    %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                      %span{"aria-hidden" => "true"} ×
+                    %h4#myModalLabel.modal-title 貸し出しリストに追加する
+                  .modal-body
+                    .form
+                      %form{:action => "bbs.php", :method => "post"}
+                        %input{:name => "mode", :type => "hidden", :value => "write"}/
+                        商品名：
+                        %input{:type => "text"}/
+                        %input{:type => "file", :value => "写真を添付"}/
+                        .clear
+                  .modal-footer
+                    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                    %button.btn.btn-primary{:type => "button"} 保存
+          .menu-4
+            %i.fa.fa-users
+            %a{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample"} 所属グループ一覧
+            %ul#collapseExample.collapse
+              %li
+                = link_to '・早稲田住み', groups_path
+              %li
+                %a{:href => ""} ・サークル
+              %li
+                %a{:href => ""} ・地元
+          .menu-5{"data-target" => "#myModal3", "data-toggle" => "modal"}
+            %i.fa.fa-plus-circle
+            %a{:href => "#myModal3"} グループ作成
+          #myModal3.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title 新しいグループを作成する。
+                .modal-body
+                  .form
+                    %form{:action => "bbs.php", :method => "post"}
+                      %input{:name => "mode", :type => "hidden", :value => "write"}/
+                      グループ名：
+                      %input{:type => "text"}/
+                      .clear
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  %button.btn.btn-primary{:type => "button"} 作成
+          .menu-4{"data-target" => "#myModal4", "data-toggle" => "modal"}
+            %i.fa.fa-pencil-square-o
+            %a{:href => "#myModal4"} プロフィール編集
+          #myModal4.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title プロフィールを編集する
+                .modal-body
+                  .form
+                    %form{:action => "bbs.php", :method => "post"}
+                      %input{:name => "mode", :type => "hidden", :value => "write"}/
+                      自己紹介
+                      %br/
+                      %textarea{:cols => "70", :name => "group-details", :rows => "5"}
+                      %br/
+                      プロフィール画像
+                      %input{:type => "file", :value => "ファイルを選択する"}/
+                      .clear
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  %button.btn.btn-primary{:type => "button"} 編集
+          .menu-5
+            %i.fa.fa-sign-out
+            / = link_to current_user.name, current_user
+            = link_to "ログアウト", sessions_path, method: :delete
+    .col-xs-10{:style => ""}
+      .main
+        .profile-profile
+          %strong プロフィール
+        .profile
+          %img.profile-img{:alt => "profile", :height => "80", :src => "assets/profile.jpg", :width => "80"}/
+          %p.profile-name
+            熊谷祐
+        %p.underline 自己紹介
+        %p.description
+          パーティーグッズたくさん持ってます笑！
+        .line
+        %p.underline 参加しているグループ
+        %p
+          %a{:href => ""} ・早稲田住み
+        %p
+          %a{:href => ""} ・サークル
+        .line
+        %p.underline 自分の貸し出し品一覧
+        .item
+          %img.item-img{:src => "assets/zero.jpg"}/
+          %p.item-name ZERO to ONE
+          %p.name 中村浩尚
+          %p.date 4月10日
+          .item-edit{"data-target" => "#item-edit", "data-toggle" => "modal"}
+            %a{:href => "#item-edit"} 編集
+          #item-edit.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title 貸し出し品を編集する
+                .modal-body
+                  .form
+                    %form{:action => "bbs.php", :method => "post"}
+                      %input{:name => "mode", :type => "hidden", :value => "write"}/
+                      貸し出し品名：
+                      %input{:type => "text-group"}/
+                      %br/
+                      %br/
+                      貸し出し品の詳細
+                      %br/
+                      %textarea{:cols => "70", :name => "group-details", :rows => "5"}
+                      %br/
+                      返却予定日:
+                      %input{:name => "返却予定日", :type => "date", :value => "2015-01-01"}/
+                      %br/
+                      %br/
+                      %p
+                        %input{:onclick => "disp()", :type => "button", :value => "貸し出しリストから消去"}/
+                      .clear
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  %button.btn.btn-primary{:type => "button"} 編集
+        .item
+          %img.item-img{:src => "assets/berryz.jpg"}/
+          %p.item-name Berryz工房（写真集）
+          %p.name 星なな
+          %p.date 4月10日
+          .item-edit{"data-target" => "#item-edit", "data-toggle" => "modal"}
+            %a{:href => "#item-edit"} 編集
+          #item-edit.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title 貸し出し品を編集する
+                .modal-body
+                  .form
+                    %form{:action => "bbs.php", :method => "post"}
+                      %input{:name => "mode", :type => "hidden", :value => "write"}/
+                      貸し出し品名：
+                      %input{:type => "text-group"}/
+                      %br/
+                      %br/
+                      貸し出し品の詳細
+                      %br/
+                      %textarea{:cols => "70", :name => "group-details", :rows => "5"}
+                      %br/
+                      返却予定日:
+                      %input{:name => "返却予定日", :type => "date", :value => "2015-01-01"}/
+                      %br/
+                      %br/
+                      %a{:href => ""} 貸し出しリストから消去
+                      .clear
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  %button.btn.btn-primary{:type => "button"} 編集
+        .item
+          %img.item-img{:src => "assets/bear.jpg"}/
+          %p.item-name 熊の帽子
+          %p.name 中村浩尚
+          %p.date 4月12日
+          .item-edit{"data-target" => "#item-edit", "data-toggle" => "modal"}
+            %a{:href => "#item-edit"} 編集
+          #item-edit.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title 貸し出し品を編集する
+                .modal-body
+                  .form
+                    %form{:action => "bbs.php", :method => "post"}
+                      %input{:name => "mode", :type => "hidden", :value => "write"}/
+                      貸し出し品名：
+                      %input{:type => "text-group"}/
+                      %br/
+                      %br/
+                      貸し出し品の詳細
+                      %br/
+                      %textarea{:cols => "70", :name => "group-details", :rows => "5"}
+                      %br/
+                      返却予定日:
+                      %input{:name => "返却予定日", :type => "date", :value => "2015-01-01"}/
+                      %br/
+                      %br/
+                      %a{:href => ""} 貸し出しリストから消去
+                      .clear
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  %button.btn.btn-primary{:type => "button"} 編集
+        .item
+          %img.item-img{:src => "assets/wear.jpg"}/
+          %p.item-name 登山用ウェア
+          %p.name 川岸健太
+          %p.date 4月15日
+          .item-edit{"data-target" => "#item-edit", "data-toggle" => "modal"}
+            %a{:href => "#item-edit"} 編集
+          #item-edit.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title 貸し出し品を編集する
+                .modal-body
+                  .form
+                    %form{:action => "bbs.php", :method => "post"}
+                      %input{:name => "mode", :type => "hidden", :value => "write"}/
+                      貸し出し品名：
+                      %input{:type => "text-group"}/
+                      %br/
+                      %br/
+                      貸し出し品の詳細
+                      %br/
+                      %textarea{:cols => "70", :name => "group-details", :rows => "5"}
+                      %br/
+                      返却予定日:
+                      %input{:name => "返却予定日", :type => "date", :value => "2015-01-01"}/
+                      %br/
+                      %br/
+                      %a{:href => ""} 貸し出しリストから消去
+                      .clear
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  %button.btn.btn-primary{:type => "button"} 編集
+        .more
+          %a.glyphicon.glyphicon-triangle-bottom.float-right{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#more-item-list"} さらに
+          .clear
+        #more-item-list.collapse
+          .more-item
+            .item
+              %img.item-img{:src => "assets/berryz.jpg"}/
+              %p.item-name Berryz工房（写真集）
+              %p.name 星なな
+        .line
+        %p.underline 貸しているもの
+        .item
+          %img.item-img{:src => "assets/zero.jpg"}/
+          %p.item-name ZERO to ONE
+          %p.name 中村浩尚
+          %p.date 4月10日
+          .item-edit{"data-target" => "#item-edit", "data-toggle" => "modal"}
+            %a{:href => "#item-edit"} 編集
+          #item-edit.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title 貸し出し品を編集する
+                .modal-body
+                  .form
+                    %form{:action => "bbs.php", :method => "post"}
+                      %input{:name => "mode", :type => "hidden", :value => "write"}/
+                      貸し出し品名：
+                      %input{:type => "text-group"}/
+                      %br/
+                      %br/
+                      貸し出し品の詳細
+                      %br/
+                      %textarea{:cols => "70", :name => "group-details", :rows => "5"}
+                      %br/
+                      返却予定日:
+                      %input{:name => "返却予定日", :type => "date", :value => "2015-01-01"}/
+                      %br/
+                      %br/
+                      %p
+                        %input{:onclick => "disp()", :type => "button", :value => "貸し出しリストから消去"}/
+                      .clear
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  %button.btn.btn-primary{:type => "button"} 編集
+        .item
+          %img.item-img{:src => "assets/berryz.jpg"}/
+          %p.item-name Berryz工房（写真集）
+          %p.name 星なな
+          %p.date 4月10日
+          .item-edit{"data-target" => "#item-edit", "data-toggle" => "modal"}
+            %a{:href => "#item-edit"} 編集
+          #item-edit.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title 貸し出し品を編集する
+                .modal-body
+                  .form
+                    %form{:action => "bbs.php", :method => "post"}
+                      %input{:name => "mode", :type => "hidden", :value => "write"}/
+                      貸し出し品名：
+                      %input{:type => "text-group"}/
+                      %br/
+                      %br/
+                      貸し出し品の詳細
+                      %br/
+                      %textarea{:cols => "70", :name => "group-details", :rows => "5"}
+                      %br/
+                      返却予定日:
+                      %input{:name => "返却予定日", :type => "date", :value => "2015-01-01"}/
+                      %br/
+                      %br/
+                      %a{:href => ""} 貸し出しリストから消去
+                      .clear
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  %button.btn.btn-primary{:type => "button"} 編集
+        .item
+          %img.item-img{:src => "assets/bear.jpg"}/
+          %p.item-name 熊の帽子
+          %p.name 中村浩尚
+          %p.date 4月12日
+          .item-edit{"data-target" => "#item-edit", "data-toggle" => "modal"}
+            %a{:href => "#item-edit"} 編集
+          #item-edit.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title 貸し出し品を編集する
+                .modal-body
+                  .form
+                    %form{:action => "bbs.php", :method => "post"}
+                      %input{:name => "mode", :type => "hidden", :value => "write"}/
+                      貸し出し品名：
+                      %input{:type => "text-group"}/
+                      %br/
+                      %br/
+                      貸し出し品の詳細
+                      %br/
+                      %textarea{:cols => "70", :name => "group-details", :rows => "5"}
+                      %br/
+                      返却予定日:
+                      %input{:name => "返却予定日", :type => "date", :value => "2015-01-01"}/
+                      %br/
+                      %br/
+                      %a{:href => ""} 貸し出しリストから消去
+                      .clear
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  %button.btn.btn-primary{:type => "button"} 編集
+        .item
+          %img.item-img{:src => "assets/wear.jpg"}/
+          %p.item-name 登山用ウェア
+          %p.name 川岸健太
+          %p.date 4月15日
+          .item-edit{"data-target" => "#item-edit", "data-toggle" => "modal"}
+            %a{:href => "#item-edit"} 編集
+          #item-edit.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title 貸し出し品を編集する
+                .modal-body
+                  .form
+                    %form{:action => "bbs.php", :method => "post"}
+                      %input{:name => "mode", :type => "hidden", :value => "write"}/
+                      貸し出し品名：
+                      %input{:type => "text-group"}/
+                      %br/
+                      %br/
+                      貸し出し品の詳細
+                      %br/
+                      %textarea{:cols => "70", :name => "group-details", :rows => "5"}
+                      %br/
+                      返却予定日:
+                      %input{:name => "返却予定日", :type => "date", :value => "2015-01-01"}/
+                      %br/
+                      %br/
+                      %a{:href => ""} 貸し出しリストから消去
+                      .clear
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  %button.btn.btn-primary{:type => "button"} 編集
+        .more
+          %a.glyphicon.glyphicon-triangle-bottom.float-right{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#more-item-list"} さらに
+          .clear
+        #more-item-list.collapse
+          .more-item
+            .item
+              %img.item-img{:src => "assets/berryz.jpg"}/
+              %p.item-name Berryz工房（写真集）
+              %p.name 星なな
+        .line
+        %p.underline 借りているもの
+        .item
+          %img.item-img{:src => "assets/taro.jpg"}/
+          %p.item-name 自分の中に毒を持て
+          %p.name 兼清光太郎
+        .line
+        %p.underline 今まで貸したもの
+        .item
+          %img.item-img{:src => "assets/tako.jpg"}/
+          %p.item-name たこ焼き器
+          %p.name 西川健太
+        .line
+        %p.underline 今まで借りたもの
+        .item
+          %img.item-img{:src => "assets/syoumei.jpg"}/
+          %p.item-name 間接照明
+          %p.name チナパ
+#footer
+  %small Copyright Yu Kumagai 2015 Shares. All rights reserved.
 
-
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+/ = link_to 'Edit', edit_user_path(@user)
+/ \|
+/ = link_to 'Back', users_path

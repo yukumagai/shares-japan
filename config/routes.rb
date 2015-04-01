@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
 
-  get 'sessions/new'
+  get 'settings/edit'
 
   get 'registrations/new'
+  get '/users/:id' => 'users#show'
   resources :registrations, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
+  resource :settings, only: [:edit, :update]
 
   resources :items
-  resources :groups do
-    resources :members
+  resources :groups
   resources :users
   resources :landings
   resources :members

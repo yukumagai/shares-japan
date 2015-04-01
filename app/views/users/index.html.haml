@@ -87,7 +87,8 @@
                   %button.btn.btn-primary{:type => "button"} 編集
           .menu-5
             %i.fa.fa-sign-out
-            %a{:href => "file:///Users/kumagaiyuu/programming/shares/index.html"} ログアウト
+            / = link_to current_user.name, current_user
+            = link_to "ログアウト", sessions_path, method: :delete
     .col-xs-10{:style => ""}
       .main
         .profile-profile
