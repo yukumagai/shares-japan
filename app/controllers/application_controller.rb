@@ -14,6 +14,6 @@ class ApplicationController < ActionController::Base
 
   private
   def not_authenticated
-    redirect_to login_url, :alert => "ログインをお願いします。"
+    redirect_to landings_url, :alert => "ログインをお願いします。"
   end
 end

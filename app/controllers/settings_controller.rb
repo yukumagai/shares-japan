@@ -12,6 +12,6 @@ class SettingsController < ApplicationController
   private
 
   def params_user
-    params.require(:user).permit(:last_name, :firts_name, :introduce, :image)
+    params.require(:user).permit(:last_name, :firts_name, :introduce, :image, :image_cache, :remove_image)
   end
 end

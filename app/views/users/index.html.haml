@@ -71,24 +71,26 @@
                   %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
                     %span{"aria-hidden" => "true"} ×
                   %h4#myModalLabel.modal-title プロフィールを編集する
-                .modal-body
-                  .form
-                    %form{:action => "bbs.php", :method => "post"}
-                      %input{:name => "mode", :type => "hidden", :value => "write"}/
-                      自己紹介
-                      %br/
-                      %textarea{:cols => "70", :name => "group-details", :rows => "5"}
-                      %br/
-                      プロフィール画像
-                      %input{:type => "file", :value => "ファイルを選択する"}/
-                      .clear
-                .modal-footer
-                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
-                  %button.btn.btn-primary{:type => "button"} 編集
-          .menu-5
-            %i.fa.fa-sign-out
-            / = link_to current_user.name, current_user
-            = link_to "ログアウト", sessions_path, method: :delete
+                  =render 'form'
+                / .modal-body
+                /   .form
+                /     %form{:action => "bbs.php", :method => "post"}
+                /       %input{:name => "mode", :type => "hidden", :value => "write"}/
+                /       自己紹介
+                /       %br/
+                /       %textarea{:cols => "70", :name => "group-details", :rows => "5"}
+                /       %br/
+                /       プロフィール画像
+                /       %input{:type => "file", :value => "ファイルを選択する"}/
+                /       .clear
+                / .modal-footer
+                /   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                /   %button.btn.btn-primary{:type => "button"} 編集
+          - if current_user
+            .menu-5
+              %i.fa.fa-sign-out
+              / = link_to current_user.name, current_user
+              = link_to "ログアウト", session_path(current_user.id), method: :delete
     .col-xs-10{:style => ""}
       .main
         .profile-profile

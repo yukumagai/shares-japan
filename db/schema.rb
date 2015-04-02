@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401100515) do
+ActiveRecord::Schema.define(version: 20150402005221) do
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150401100515) do
     t.string   "screen_name"
     t.text     "self_introduce"
     t.string   "user_group"
+    t.string   "image"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
