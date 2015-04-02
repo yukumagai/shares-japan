@@ -9,7 +9,7 @@ class RegistrationsController < ApplicationController
     logger.debug @user.inspect
 
     if @user.save
-      redirect_to new_registration_url
+      redirect_to user_url
     else
       render :new
     end
@@ -18,6 +18,6 @@ class RegistrationsController < ApplicationController
   private
 
   def params_user
-    params.require(:user).permit(:first_name, :last_name, :screen_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:image, :first_name, :last_name, :screen_name, :email, :password, :password_confirmation)
   end
 end

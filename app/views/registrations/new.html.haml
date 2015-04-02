@@ -33,6 +33,10 @@
             .form-group
               = f.password_field :password_confirmation, placeholder: "パスワードの再入力", class: "form-control input-lg"
               / %input#password_confirmation.form-control.input-lg{:name => "password_confirmation", :placeholder => "パスワードの再入力", :tabindex => "6", :type => "password"}/
+        .row
+          .form-group
+            画像を挿入してください
+            = f.file_field :image, placefolder: "画像を選択してください"
         %div{:align => "center"}
           %small
             「利用規約」および「プライバシーポリシー」をご確認の上、

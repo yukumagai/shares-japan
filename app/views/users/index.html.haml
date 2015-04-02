@@ -4,9 +4,9 @@
       .float-left
         %img{:alt => "logo", :height => "50", :src => "assets/Shares-logo.png", :width => "200"}/
       .profile
-        %img.profile-img{:alt => "profile", :height => "80", :src => "assets/profile.jpg", :width => "80"}/
+        = image_tag @user.image.url
         %p.profile-name
-          %a{:href => "file:///Users/kumagaiyuu/programming/shares/profile.html"} 熊谷祐
+          = @user.screen_name
       .menu メニュー
       %ul.menu-ul
         %li.menu-li
