@@ -9,7 +9,7 @@ class RegistrationsController < ApplicationController
     logger.debug @user.inspect
 
     if @user.save
-      redirect_to user_url
+      redirect_to users_url
     else
       render :new
     end
