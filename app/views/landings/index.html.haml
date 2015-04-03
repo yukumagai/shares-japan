@@ -1,0 +1,50 @@
+#page
+  %header
+    %nav
+      .float-left
+        .logo
+          = image_tag "Shares-logo.png"
+      .float-right
+        %ul
+          / %li
+          /   %a{:href => ""}
+          /     %img{:alt => "facebook", :src => "assets/facebook.png"}/
+          %li
+            = link_to new_session_path do
+              マイページ
+              %i.fa.fa-sign-in
+          %li
+            = link_to registrations_new_path do
+              会員登録
+              %i.fa.fa-user
+%div{:align => "center"}
+  .main-image
+    = image_tag "top2.png"
+#main
+  %div{:align => "center"}
+    %h1 サービス説明
+    %p
+      Sharesは、
+      %strong> グループ内で気軽に貸し借りができるサービス
+      です。
+    %p １年に数回しか使わないたこ焼き器、アクセサリー、間接照明など、
+    %p
+      %strong> 「買うほどじゃないけど、あったらいいな」
+      というモノから、
+    %p 調味料や食器、ドライヤーなどの日常生活品まで
+    %p 生活の様々な場面で貸し借りをして、生活を豊かにしてみてはどうでしょうか。
+    %h2 使い方
+  .howto-content
+    %ul.howto
+      %li ①会員登録をする
+      %li ②グループに加入（作成）する。
+      %li ③貸し出しリストに貸せるものを追加。
+      %li ④借りたいものを選択し、持ち主にメッセージ
+  %h3.line
+  %ul.introduce
+    %li
+      %a{:href => ""} 作成者
+    %li
+      %a{:href => ""} ブログ
+  %footer
+    %small Copyright Yu Kumagai 2015 Shares. All rights reserved.
