@@ -99,10 +99,10 @@
         .profile
           %img.profile-img{:alt => "profile", :height => "80", :src => "assets/profile.jpg", :width => "80"}/
           %p.profile-name
-            熊谷祐
+            = @user.screen_name
         %p.underline 自己紹介
         %p.description
-          パーティーグッズたくさん持ってます笑！
+          = @user.self_introudce
         .line
         %p.underline 参加しているグループ
         %p
