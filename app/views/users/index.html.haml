@@ -4,7 +4,8 @@
       .float-left
         %img{:alt => "logo", :height => "50", :src => "assets/Shares-logo.png", :width => "200"}/
       .profile
-        = image_tag @user.image.url
+        %p.profile-img
+          = image_tag @user.image.url
         %p.profile-name
           = @user.screen_name
       .menu メニュー

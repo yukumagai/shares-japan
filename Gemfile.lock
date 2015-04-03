@@ -167,6 +167,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
+    rmagick (2.14.0)
     ruby_parser (3.6.5)
       sexp_processor (~> 4.1)
     sass (3.4.13)
@@ -236,6 +237,7 @@ DEPENDENCIES
   pry-doc
   pry-rails
   rails (= 4.2.0)
+  rmagick
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sorcery
