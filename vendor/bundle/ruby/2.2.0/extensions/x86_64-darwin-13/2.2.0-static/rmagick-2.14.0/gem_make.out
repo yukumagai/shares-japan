@@ -1,4 +1,4 @@
-/Users/kumagaiyuu/.rbenv/versions/2.2.0/bin/ruby -r ./siteconf20150403-73362-mzkxxy.rb extconf.rb 
+/Users/kumagaiyuu/.rbenv/versions/2.2.0/bin/ruby -r ./siteconf20150403-96122-mvzuw5.rb extconf.rb 
 checking for clang... yes
 checking for Magick-config... yes
 checking for outdated ImageMagick version (<= 6.4.9)... no
@@ -126,7 +126,7 @@ creating Makefile
 
 
 ======================================================================
-Fri 03Apr15 19:12:49
+Fri 03Apr15 20:20:38
 This installation of RMagick 2.14.0 is configured for
 Ruby 2.2.0 (x86_64-darwin13) and ImageMagick 
 ======================================================================
@@ -185,4 +185,4 @@ compiling rmutil.c
 linking shared-object RMagick2.bundle
 
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 RMagick2.bundle ./.gem.20150403-73362-5zjwzf
+/usr/bin/install -c -m 0755 RMagick2.bundle ./.gem.20150403-96122-qfs8t8

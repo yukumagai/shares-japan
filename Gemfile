@@ -23,33 +23,14 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'haml-rails'
-
 gem 'bootstrap-sass'
-
 gem 'kaminari'
-
 gem 'awesome_print'
-
 gem 'font-awesome-sass'
-
-gem 'pry-rails', :group => :development
-
 gem 'sorcery'
-
 gem 'carrierwave'
-
 gem 'nokogiri'
-
 gem 'mini_magick'
-
-gem 'pry-doc'
-
-gem 'hirb'
-
-gem 'hirb-unicode'
-
-gem 'better_errors'
-
 gem 'rmagick'
 
 gem 'sqlite3', group: :development
@@ -67,6 +48,11 @@ gem 'rails_12factor', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'hirb'
+  gem 'hirb-unicode'
+  gem 'better_errors'
   gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views

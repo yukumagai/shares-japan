@@ -1,4 +1,4 @@
-/Users/kumagaiyuu/.rbenv/versions/2.2.0/bin/ruby -r ./siteconf20150403-73185-1rasyim.rb extconf.rb 
+/Users/kumagaiyuu/.rbenv/versions/2.2.0/bin/ruby -r ./siteconf20150403-96122-effay4.rb extconf.rb 
 creating Makefile
 
 make "DESTDIR=" clean
