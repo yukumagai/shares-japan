@@ -102,7 +102,8 @@
               %p.underline.font-weight グループ名
             .group-name 早稲田住み
             .item-add
-              %button.btn.btn-primary.btn-ms{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"} 貸し出しリストに追加
+              %button.btn.btn-primary.btn-ms{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"} do
+              = link to "貸し出しリストに追加", edit_item_path(current_user.id)
             #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
               .modal-dialog
                 .modal-content
@@ -110,23 +111,22 @@
                     %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
                       %span{"aria-hidden" => "true"} ×
                     %h4#myModalLabel.modal-title 貸し出しリストに追加する
-                    = render 'form'
-            /       .modal-body
-            /         .form
-            /           %form{:action => "bbs.php", :method => "post"}
-            /             %input{:name => "mode", :type => "hidden", :value => "write"}/
-            /             商品名：
-            /             %input{:type => "text"}/
-            /             %input{:type => "file", :value => "写真を添付"}/
-            /             .clear
-            /       .modal-footer
-            /         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
-            /         %button.btn.btn-primary{:type => "button"} 保存
-            / %form.navbar-form
-            /   .form-group
-            /     %input.form-control{:placeholder => "キーワード", :type => "text"}/
-            /   %button.btn.btn-xs{:type => "submit"}
-            /     %i.fa.fa-search 検索
+                  .modal-body
+                    .form
+                      %form{:action => "bbs.php", :method => "post"}
+                        %input{:name => "mode", :type => "hidden", :value => "write"}/
+                        商品名：
+                        %input{:type => "text"}/
+                        %input{:type => "file", :value => "写真を添付"}/
+                        .clear
+                  .modal-footer
+                    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                    %button.btn.btn-primary{:type => "button"} 保存
+            %form.navbar-form
+              .form-group
+                %input.form-control{:placeholder => "キーワード", :type => "text"}/
+              %button.btn.btn-xs{:type => "submit"}
+                %i.fa.fa-search 検索
             .line
             %p.underline 貸し出しリスト
             .item

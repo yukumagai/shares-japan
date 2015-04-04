@@ -1,16 +1,13 @@
-%p#notice= notice
+%p#notice= 貸し出しリストに追加
 
 %p
-  %b Name:
+  %b 商品名:
   = @item.name
 %p
-  %b Introduce:
-  = @item.introduce
-%p
-  %b Image:
+  %b 画像:
   = @item.image
 %p
-  %b Date:
+  %b 日にち:
   = @item.date
 
 = link_to 'Edit', edit_item_path(@item)
