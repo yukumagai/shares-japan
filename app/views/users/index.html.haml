@@ -13,7 +13,8 @@
         %li.menu-li
           .menu-1
             %i.fa.fa-plus{"data-target" => "#myModal", "data-toggle" => "modal",} 
-            %a 貸し出しリストに追加
+            %a{:href => "#myModal4"} 貸し出しリストに追加
+            / = link to "貸し出しリストに追加", edit_item_path(current_user.id)
             #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
               .modal-dialog
                 .modal-content
@@ -21,17 +22,18 @@
                     %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
                       %span{"aria-hidden" => "true"} ×
                     %h4#myModalLabel.modal-title 貸し出しリストに追加する
-                  .modal-body
-                    .form
-                      %form{:action => "bbs.php", :method => "post"}
-                        %input{:name => "mode", :type => "hidden", :value => "write"}/
-                        商品名：
-                        %input{:type => "text"}/
-                        %input{:type => "file", :value => "写真を添付"}/
-                        .clear
-                  .modal-footer
-                    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
-                    %button.btn.btn-primary{:type => "button"} 保存
+                    = render 'items/form'
+                  / .modal-body
+                  /   .form
+                  /     %form{:action => "bbs.php", :method => "post"}
+                  /       %input{:name => "mode", :type => "hidden", :value => "write"}/
+                  /       商品名：
+                  /       %input{:type => "text"}/
+                  /       %input{:type => "file", :value => "写真を添付"}/
+                  /       .clear
+                  / .modal-footer
+                  /   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  /   %button.btn.btn-primary{:type => "button"} 保存
           .menu-4
             %i.fa.fa-users
             %a{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample"} 所属グループ一覧

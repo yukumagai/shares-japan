@@ -2,16 +2,32 @@ class ItemsController < ApplicationController
   before_filter :require_login
 
   def index
+    @item = Item.new
     @user = current_user
-    @items = Item.all
   end
 
   def show
     @item = Item.find(params[:id])
+    @user = current_user
+    @items = Item.all
   end
 
   def edit
     @user = User.find(params[:id])
+  end
+
+  def create
+    @item = Item.new(items_user)
+
+    respond_to do |format|
+      if @item.save
+        format.html { redirect_to @item, notice: 'Item was successfully created.' }
+        format.json { render :show, status: :created, location: @item }
+      else
+        format.html { render :new }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def update
@@ -22,7 +38,7 @@ class ItemsController < ApplicationController
 
    private
 
-  def params_user
-    params.require(:user).permit(:screen_name, :self_introduce, :image)
+  def items_user
+    params.require(:item).permit(:name, :image, :date)
   end
 end

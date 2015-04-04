@@ -10,13 +10,12 @@
     = f.label :name
     = f.text_field :name
   .field
-    = f.label :introduce
-    = f.text_area :introduce
-  .field
     = f.label :image
-    = f.text_field :image
+    %br/
+    = f.file_field :image
+    = f.hidden_field :image_cache
   .field
     = f.label :date
-    = f.number_field :date
+    = f.date_field :date
   .actions
-    = f.submit 'Save'
+    = f.submit '保存'

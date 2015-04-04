@@ -1,23 +1,112 @@
-%h1 Listing members
-
-%table
-  %thead
-    %tr
-      %th User
-      %th Group
-      %th
-      %th
-      %th
-
-  %tbody
-    - @members.each do |member|
-      %tr
-        %td= member.user_id
-        %td= member.group_id
-        %td= link_to 'Show', member
-        %td= link_to 'Edit', edit_member_path(member)
-        %td= link_to 'Destroy', member, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Member', new_member_path
+.container-fluid
+  .row
+    .col-xs-2
+      .float-left
+        = image_tag "Shares-logo.png"
+      .profile
+        %p.profile-img
+          = image_tag @user.image.url
+        %p.profile-name
+          = @user.screen_name
+      .menu メニュー
+      %ul.menu-ul
+        %li.menu-li
+          .menu-1
+            %i.fa.fa-search
+            = link_to '貸し出しリスト', items_path
+          / .menu-2
+          /   %i.fa.fa-comments
+          /   %a{:href => "file:///Users/kumagaiyuu/programming/shares/group-pages.html"} タイムライン
+          / .menu-3{"data-target" => "#myModal2", "data-toggle" => "modal"}
+          /   %i.fa.fa-user-plus
+          /   %a{:href => "#myModal2"} 友達を招待する
+          / #myModal2.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+          /   .modal-dialog
+          /     .modal-content
+          /       .modal-header
+          /         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          /           %span{"aria-hidden" => "true"} ×
+          /         %h4#myModalLabel.modal-title メールアドレスで友達を招待する。
+          /       .modal-body
+          /         .form
+          /           %form{:action => "bbs.php", :method => "post"}
+          /             %input{:name => "mode", :type => "hidden", :value => "write"}/
+          /             メールアドレス：
+          /             %input{:type => "text", :value => "example@gmail.com"}/
+          /             .clear
+          /       .modal-footer
+          /         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+          /         %button.btn.btn-primary{:type => "button"} 招待
+          %i.fa.fa-exchange
+          %a{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample"} グループ切替
+          %ul#collapseExample.collapse
+            %li
+              %a{:href => ""} ・ゼミ
+            %li
+              %a{:href => ""} ・サークル
+            %li
+              %a{:href => ""} ・地元
+          .menu-5{"data-target" => "#myModal3", "data-toggle" => "modal"}
+            %i.fa.fa-plus-circle
+            %a{:href => "#myModal3"} グループ作成
+          #myModal3.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title 新しいグループを作成する。
+                .modal-body
+                  .form
+                    %form{:action => "bbs.php", :method => "post"}
+                      %input{:name => "mode", :type => "hidden", :value => "write"}/
+                      グループ名：
+                      %input{:type => "text"}/
+                      .clear
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  %button.btn.btn-primary{:type => "button"} 作成
+    .col-xs-10{:style => ""}
+      .main
+        .group-images-box
+          .group-images
+        .group-name
+          %p.underline.font-weight グループ名
+        .group-name 早稲田住み
+        .row
+          .col-xs-9{:style => ""}
+            .line
+            .member-list
+              .profile
+                %ul
+                  %li
+                    %p.font-weight-underline メンバー一覧
+                    %p
+                      %a{:href => "file:///Users/kumagaiyuu/programming/shares/profile.html"} ・熊谷祐
+                    %p
+                      %a{:href => ""} ・チナパ
+                    %p
+                      %a{:href => ""} ・中村浩尚
+                    %p
+                      %a{:href => ""} ・西川健太
+                    %p
+                      %a{:href => ""} ・川岸健太
+                    %p
+                      %a{:href => ""} ・星なな
+                    %p
+                      %a{:href => ""} ・兼清光太郎
+            .line
+          .col-xs-3{:style => ""}
+            / %p.font-weight-underline グループ説明
+            / %p.member
+            / = link_to "メンバー詳細" members_url
+            / %p.group-details こんにちは！管理人の熊谷です。このグループは早稲田に住んでいる人限定のグループです。
+            .line
+            %p.font-weight-underline 管理人
+            .profile
+              %p.profile-img
+                = image_tag "profile.jpg"
+              %p.profile-name
+                %a{:href => ""} 熊谷祐
+#footer
+  %small Copyright Yu Kumagai 2015 Shares. All rights reserved.

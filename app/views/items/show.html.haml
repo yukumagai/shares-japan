@@ -1,15 +1,214 @@
-%p#notice= 貸し出しリストに追加
+.container-fluid
+  .row
+    .col-xs-2
+      .float-left
+        = image_tag "Shares-logo.png"
+      .profile
+        %p.profile-img
+          = image_tag @user.image.url
+        %p.profile-name
+          = @user.screen_name
+      .menu メニュー
+      %ul.menu-ul
+        %li.menu-li
+          .menu-1
+            %i.fa.fa-search
+            %a{:href => ""} 貸し出しリスト
+          / .menu-3{"data-target" => "#myModal2", "data-toggle" => "modal"}
+          /   %i.fa.fa-user-plus
+          /   %a{:href => "#myModal2"} 友達を招待する
+          / #myModal2.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+          /   .modal-dialog
+          /     .modal-content
+          /       .modal-header
+          /         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          /           %span{"aria-hidden" => "true"} ×
+          /         %h4#myModalLabel.modal-title メールアドレスで友達を招待する。
+          /       .modal-body
+          /         .form
+          /           %form{:action => "bbs.php", :method => "post"}
+          /             %input{:name => "mode", :type => "hidden", :value => "write"}/
+          /             メールアドレス：
+          /             %input{:type => "text", :value => "example@gmail.com"}/
+          /             .clear
+          /       .modal-footer
+          /         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+          /         %button.btn.btn-primary{:type => "button"} 招待
+          .menu-4{"data-target" => "#myModal4", "data-toggle" => "modal"}
+            %i.fa.fa-pencil-square-o
+            %a{:href => "#myModal4"} グループ編集
+          #myModal4.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title グループを編集する
+                .modal-body
+                  .form
+                    %form{:action => "bbs.php", :method => "post"}
+                      %input{:name => "mode", :type => "hidden", :value => "write"}/
+                      グループ名：
+                      %input{:type => "text-group"}/
+                      %br/
+                      グループ説明
+                      %br/
+                      %textarea{:cols => "70", :name => "group-details", :rows => "5"}
+                      .clear
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  %button.btn.btn-primary{:type => "button"} 編集
+          %i.fa.fa-exchange
+          %a{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample"} グループ切替
+          %ul#collapseExample.collapse
+            %li
+              %a{:href => ""} ・ゼミ
+            %li
+              %a{:href => ""} ・サークル
+            %li
+              %a{:href => ""} ・地元
+          .menu-5{"data-target" => "#myModal3", "data-toggle" => "modal"}
+            %i.fa.fa-plus-circle
+            %a{:href => "#myModal3"} グループ作成
+          #myModal3.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title 新しいグループを作成する。
+                .modal-body
+                  .form
+                    %form{:action => "bbs.php", :method => "post"}
+                      %input{:name => "mode", :type => "hidden", :value => "write"}/
+                      グループ名：
+                      %input{:type => "text"}/
+                      .clear
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  %button.btn.btn-primary{:type => "button"} 作成
+          - if current_user
+            .menu-5
+              %i.fa.fa-sign-out
+              / = link_to current_user.name, current_user
+              = link_to "ログアウト", session_path(current_user.id), method: :delete
+    .col-xs-10{:style => ""}
+      .main
+        .group-images-box
+          .group-images
+        .row
+          .col-xs-9{:style => ""}
+            .group-name
+              %p.underline.font-weight グループ名
+            .group-name 早稲田住み
+            .item-add
+              %button.btn.btn-primary.btn-ms{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"} 貸し出しリストに追加
+            #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+              .modal-dialog
+                .modal-content
+                  .modal-header
+                    %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                      %span{"aria-hidden" => "true"} ×
+                    %h4#myModalLabel.modal-title 貸し出しリストに追加する
+                    = render 'form'
+                  / .modal-body
+                  /   .form
+                  /     %form{:action => "bbs.php", :method => "post"}
+                  /       %input{:name => "mode", :type => "hidden", :value => "write"}/
+                  /       商品名：
+                  /       %input{:type => "text"}/
+                  /       %input{:type => "file", :value => "写真を添付"}/
+                  /       .clear
+                  / .modal-footer
+                  /   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  /   %button.btn.btn-primary{:type => "button"} 保存
+            %form.navbar-form
+              .form-group
+                %input.form-control{:placeholder => "キーワード", :type => "text"}/
+              %button.btn.btn-xs{:type => "submit"}
+                %i.fa.fa-search 検索
+            .line
+            %p.underline 貸し出しリスト
+            .item
+              .item-img
+              = image_tag @item.image.url
+              %p.item-name
+                = @item.name
+              %p.name
+                = @user.screen_name
+            .item
+              .item-img
+              = image_tag "berryz.jpg"
+              %p.item-name
+                %a{:href => ""} Berryz工房（写真集）
+              %p.name
+                %a{:href => ""} 星なな
+            .item
+              .item-img
+              = image_tag "taro.jpg"
+              %p.item-name
+                %a{:href => ""} 自分の中に毒を持て
+              %p.name
+                %a{:href => ""} 兼清光太郎
+            .item
+              .item-img
+              = image_tag "wear.jpg"
+              %p.item-name
+                %a{:href => ""} 登山用ウェア
+              %p.name
+                %a{:href => ""} 中村浩尚
+            .item
+              .item-img
+              = image_tag "tako.jpg"
+              %p.item-name
+                %a{:href => ""} たこ焼き器
+              %p.name
+                %a{:href => ""} 熊谷祐
+            .item
+              .item-img
+              = image_tag "tie.jpg"
+              %p.item-name
+                %a{:href => ""} ネクタイ
+              %p.name
+                %a{:href => ""} 中村浩尚
+            .more
+              %a.glyphicon.glyphicon-triangle-bottom.float-right{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#more-item-list"} さらに
+              .clear
+            #more-item-list.collapse
+              .more-item
+                .item
+                  %img.item-img{:src => "assets/berryz.jpg"}/
+                  %p.item-name Berryz工房（写真集）
+                  %p.name 星なな
+          .col-xs-3{:style => ""}
+            %p.font-weight-underline グループ説明
+            %p.member
+            = link_to 'メンバー詳細', members_path
+            %p.group-details こんにちは！管理人の熊谷です。このグループは早稲田に住んでいる人限定のグループです。
+            .line
+            %p.font-weight-underline 管理人
+            .profile
+              %p.profile-img
+                = image_tag "profile.jpg"
+              %p.profile-name
+                %a{:href => ""} 熊谷祐
+#footer
+  %small Copyright Yu Kumagai 2015 Shares. All rights reserved.
 
-%p
-  %b 商品名:
-  = @item.name
-%p
-  %b 画像:
-  = @item.image
-%p
-  %b 日にち:
-  = @item.date
 
-= link_to 'Edit', edit_item_path(@item)
-\|
-= link_to 'Back', items_path
+
+/ %p#notice= 貸し出しリストに追加
+
+/ %p
+/   %b 商品名:
+/   = @item.name
+/ %p
+/   %b 画像:
+/   = @item.image
+/ %p
+/   %b 日にち:
+/   = @item.date
+
+/ = link_to 'Edit', edit_item_path(@item)
+/ \|
+/ = link_to 'Back', items_path
