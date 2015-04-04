@@ -9,6 +9,7 @@ class RegistrationsController < ApplicationController
     logger.debug @user.inspect
 
     if @user.save
+      auto_login(@user)
       redirect_to users_url
     else
       render :new
