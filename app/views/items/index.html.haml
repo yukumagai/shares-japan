@@ -110,22 +110,23 @@
                     %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
                       %span{"aria-hidden" => "true"} ×
                     %h4#myModalLabel.modal-title 貸し出しリストに追加する
-                  .modal-body
-                    .form
-                      %form{:action => "bbs.php", :method => "post"}
-                        %input{:name => "mode", :type => "hidden", :value => "write"}/
-                        商品名：
-                        %input{:type => "text"}/
-                        %input{:type => "file", :value => "写真を添付"}/
-                        .clear
-                  .modal-footer
-                    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
-                    %button.btn.btn-primary{:type => "button"} 保存
-            %form.navbar-form
-              .form-group
-                %input.form-control{:placeholder => "キーワード", :type => "text"}/
-              %button.btn.btn-xs{:type => "submit"}
-                %i.fa.fa-search 検索
+                    = render 'form'
+            /       .modal-body
+            /         .form
+            /           %form{:action => "bbs.php", :method => "post"}
+            /             %input{:name => "mode", :type => "hidden", :value => "write"}/
+            /             商品名：
+            /             %input{:type => "text"}/
+            /             %input{:type => "file", :value => "写真を添付"}/
+            /             .clear
+            /       .modal-footer
+            /         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+            /         %button.btn.btn-primary{:type => "button"} 保存
+            / %form.navbar-form
+            /   .form-group
+            /     %input.form-control{:placeholder => "キーワード", :type => "text"}/
+            /   %button.btn.btn-xs{:type => "submit"}
+            /     %i.fa.fa-search 検索
             .line
             %p.underline 貸し出しリスト
             .item
