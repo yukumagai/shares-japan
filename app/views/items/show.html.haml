@@ -7,7 +7,7 @@
         %p.profile-img
           = image_tag @user.image.url
         %p.profile-name
-          = @user.screen_name
+          = link_to "#{@user.screen_name}", user_path
       .menu メニュー
       %ul.menu-ul
         %li.menu-li

@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     @user = User.new
-    redirect_to users_url
+    @item = Item.new
   end
 
   def create

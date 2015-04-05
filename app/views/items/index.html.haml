@@ -7,7 +7,7 @@
         %p.profile-img
           = image_tag @user.image.url
         %p.profile-name
-          = @user.screen_name
+          = link_to "#{@user.screen_name}", users_path
       .menu メニュー
       %ul.menu-ul
         %li.menu-li
@@ -135,7 +135,7 @@
               %p.item-name
               = @item.name
               %p.name
-                %a{:href => ""} 中村浩尚
+              = current_user.screen_name
             .item
               .item-img
               = image_tag "berryz.jpg"

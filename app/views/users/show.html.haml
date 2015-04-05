@@ -2,17 +2,19 @@
   .row
     .col-xs-2
       .float-left
-        %img{:alt => "logo", :height => "50", :src => "assets/Shares-logo.png", :width => "200"}/
+        = image_tag "Shares-logo.png"
       .profile
-        %img.profile-img{:alt => "profile", :height => "80", :src => "assets/profile.jpg", :width => "80"}/
+        %p.profile-img
+          = image_tag @user.image.url
         %p.profile-name
-          %a{:href => "file:///Users/kumagaiyuu/programming/shares/profile.html"} 熊谷祐
+          = @user.screen_name
       .menu メニュー
       %ul.menu-ul
         %li.menu-li
           .menu-1
             %i.fa.fa-plus{"data-target" => "#myModal", "data-toggle" => "modal",} 
-            %a 貸し出しリストに追加
+            %a{:href => "#myModal4"} 貸し出しリストに追加
+            / = link to "貸し出しリストに追加", edit_item_path(current_user.id)
             #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
               .modal-dialog
                 .modal-content
@@ -20,23 +22,24 @@
                     %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
                       %span{"aria-hidden" => "true"} ×
                     %h4#myModalLabel.modal-title 貸し出しリストに追加する
-                  .modal-body
-                    .form
-                      %form{:action => "bbs.php", :method => "post"}
-                        %input{:name => "mode", :type => "hidden", :value => "write"}/
-                        商品名：
-                        %input{:type => "text"}/
-                        %input{:type => "file", :value => "写真を添付"}/
-                        .clear
-                  .modal-footer
-                    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
-                    %button.btn.btn-primary{:type => "button"} 保存
+                    = render 'items/form'
+                  / .modal-body
+                  /   .form
+                  /     %form{:action => "bbs.php", :method => "post"}
+                  /       %input{:name => "mode", :type => "hidden", :value => "write"}/
+                  /       商品名：
+                  /       %input{:type => "text"}/
+                  /       %input{:type => "file", :value => "写真を添付"}/
+                  /       .clear
+                  / .modal-footer
+                  /   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                  /   %button.btn.btn-primary{:type => "button"} 保存
           .menu-4
             %i.fa.fa-users
             %a{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample"} 所属グループ一覧
             %ul#collapseExample.collapse
               %li
-                = link_to '・早稲田住み', groups_path
+                = link_to '・早稲田住み', items_path
               %li
                 %a{:href => ""} ・サークル
               %li
@@ -71,48 +74,55 @@
                   %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
                     %span{"aria-hidden" => "true"} ×
                   %h4#myModalLabel.modal-title プロフィールを編集する
-                .modal-body
-                  .form
-                    %form{:action => "bbs.php", :method => "post"}
-                      %input{:name => "mode", :type => "hidden", :value => "write"}/
-                      自己紹介
-                      %br/
-                      %textarea{:cols => "70", :name => "group-details", :rows => "5"}
-                      %br/
-                      プロフィール画像
-                      %input{:type => "file", :value => "ファイルを選択する"}/
-                      .clear
-                .modal-footer
-                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
-                  %button.btn.btn-primary{:type => "button"} 編集
-          .menu-5
-            %i.fa.fa-sign-out
-            / = link_to current_user.name, current_user
-            = link_to "ログアウト", sessions_path, method: :delete
+                  =render 'form'
+                / .modal-body
+                /   .form
+                /     %form{:action => "bbs.php", :method => "post"}
+                /       %input{:name => "mode", :type => "hidden", :value => "write"}/
+                /       自己紹介
+                /       %br/
+                /       %textarea{:cols => "70", :name => "group-details", :rows => "5"}
+                /       %br/
+                /       プロフィール画像
+                /       %input{:type => "file", :value => "ファイルを選択する"}/
+                /       .clear
+                / .modal-footer
+                /   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
+                /   %button.btn.btn-primary{:type => "button"} 編集
+          - if current_user
+            .menu-5
+              %i.fa.fa-sign-out
+              / = link_to current_user.name, current_user
+              = link_to "ログアウト", session_path(current_user.id), method: :delete
     .col-xs-10{:style => ""}
       .main
         .profile-profile
           %strong プロフィール
         .profile
-          %img.profile-img{:alt => "profile", :height => "80", :src => "assets/profile.jpg", :width => "80"}/
+          %p.profile-img
+            = image_tag @user.image.url
           %p.profile-name
-            熊谷祐
+            = @user.screen_name
         %p.underline 自己紹介
         %p.description
-          パーティーグッズたくさん持ってます笑！
+          = @user.self_introduce
         .line
         %p.underline 参加しているグループ
         %p
-          %a{:href => ""} ・早稲田住み
+          = link_to '・早稲田住み', items_path
         %p
           %a{:href => ""} ・サークル
         .line
         %p.underline 自分の貸し出し品一覧
         .item
-          %img.item-img{:src => "assets/zero.jpg"}/
-          %p.item-name ZERO to ONE
-          %p.name 中村浩尚
-          %p.date 4月10日
+          .item-img
+          = image_tag @item.image.url
+          %p.item-name
+          = @item.name
+          %p.name
+          = current_user.screen_name
+          %p.date 
+          = @item.date
           .item-edit{"data-target" => "#item-edit", "data-toggle" => "modal"}
             %a{:href => "#item-edit"} 編集
           #item-edit.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
@@ -145,7 +155,8 @@
                   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
                   %button.btn.btn-primary{:type => "button"} 編集
         .item
-          %img.item-img{:src => "assets/berryz.jpg"}/
+          %item-img
+          = image_tag "berryz.jpg"
           %p.item-name Berryz工房（写真集）
           %p.name 星なな
           %p.date 4月10日
@@ -180,7 +191,8 @@
                   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
                   %button.btn.btn-primary{:type => "button"} 編集
         .item
-          %img.item-img{:src => "assets/bear.jpg"}/
+          .item-img
+          = image_tag "bear.jpg"
           %p.item-name 熊の帽子
           %p.name 中村浩尚
           %p.date 4月12日
@@ -215,7 +227,8 @@
                   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
                   %button.btn.btn-primary{:type => "button"} 編集
         .item
-          %img.item-img{:src => "assets/wear.jpg"}/
+          .item-img
+          = image_tag "wear.jpg"
           %p.item-name 登山用ウェア
           %p.name 川岸健太
           %p.date 4月15日
@@ -255,13 +268,15 @@
         #more-item-list.collapse
           .more-item
             .item
-              %img.item-img{:src => "assets/berryz.jpg"}/
+              .item-img
+              = image_tag "berryz.jpg"
               %p.item-name Berryz工房（写真集）
               %p.name 星なな
         .line
         %p.underline 貸しているもの
         .item
-          %img.item-img{:src => "assets/zero.jpg"}/
+          .item-img
+          = image_tag "zero.jpg"
           %p.item-name ZERO to ONE
           %p.name 中村浩尚
           %p.date 4月10日
@@ -297,7 +312,8 @@
                   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
                   %button.btn.btn-primary{:type => "button"} 編集
         .item
-          %img.item-img{:src => "assets/berryz.jpg"}/
+          .item-img
+          = image_tag "berryz.jpg"
           %p.item-name Berryz工房（写真集）
           %p.name 星なな
           %p.date 4月10日
@@ -332,7 +348,8 @@
                   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
                   %button.btn.btn-primary{:type => "button"} 編集
         .item
-          %img.item-img{:src => "assets/bear.jpg"}/
+          .item-img
+          = image_tag "bear.jpg"
           %p.item-name 熊の帽子
           %p.name 中村浩尚
           %p.date 4月12日
@@ -367,7 +384,8 @@
                   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 中止
                   %button.btn.btn-primary{:type => "button"} 編集
         .item
-          %img.item-img{:src => "assets/wear.jpg"}/
+          .item-img
+          = image_tag "wear.jpg"
           %p.item-name 登山用ウェア
           %p.name 川岸健太
           %p.date 4月15日
@@ -407,30 +425,30 @@
         #more-item-list.collapse
           .more-item
             .item
-              %img.item-img{:src => "assets/berryz.jpg"}/
-              %p.item-name Berryz工房（写真集）
-              %p.name 星なな
+              .item-img
+              = image_tag "tako.jpg"
+              %p.item-name たこ焼き器
+              %p.name 中尾彬
         .line
         %p.underline 借りているもの
         .item
-          %img.item-img{:src => "assets/taro.jpg"}/
+          .item-img
+          = image_tag "taro.jpg"
           %p.item-name 自分の中に毒を持て
           %p.name 兼清光太郎
         .line
         %p.underline 今まで貸したもの
         .item
-          %img.item-img{:src => "assets/tako.jpg"}/
+          .item-img
+          = image_tag "tako.jpg"
           %p.item-name たこ焼き器
           %p.name 西川健太
         .line
         %p.underline 今まで借りたもの
         .item
-          %img.item-img{:src => "assets/syoumei.jpg"}/
+          .item-img
+          = image_tag "syoumei.jpg"
           %p.item-name 間接照明
           %p.name チナパ
 #footer
   %small Copyright Yu Kumagai 2015 Shares. All rights reserved.
-
-/ = link_to 'Edit', edit_user_path(@user)
-/ \|
-/ = link_to 'Back', users_path

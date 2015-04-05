@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'settings/edit'
 
   get 'registrations/new'
+
+  get 'sessions/new'
   # get '/users/:id' => 'users#show'
   resources :registrations, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
